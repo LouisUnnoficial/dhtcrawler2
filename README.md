@@ -1,57 +1,57 @@
 ## dhtcrawler2
 
-dhtcrawler is a DHT crawler written in erlang. It can join a DHT network and crawl many P2P torrents. The program saves all torrent info into database and provide an http interface to search a torrent by a keyword.
+O dhtcrawler é um *crawler* de DHT escrito em Erlang. Ele pode ingressar em uma rede DHT e rastrear diversos torrents P2P. O programa salva todas as informações dos torrents em um banco de dados e disponibiliza uma interface HTTP para pesquisar torrents por palavra-chave.
 
 ![screenshot](https://raw.github.com/kevinlynx/dhtcrawler/master/screenshot.png)
 
-dhtcrawler2 is an extended version to [dhtcrawler](https://github.com/kevinlynx/dhtcrawler). It has improved a lot on crawling speed, and is much more stable. 
+O dhtcrawler2 é uma versão estendida do [dhtcrawler](https://github.com/kevinlynx/dhtcrawler). Ele apresenta uma velocidade de rastreamento muito superior e é bem mais estável. 
 
-This git branch maintains pre-compiled erlang files to start dhtcrawler2 directly. So you don't need to compile it yourself, just download it and run it to collect torrents and search a torrent by a keyword. 
+Esta branch do Git mantém arquivos Erlang pré-compilados para iniciar o dhtcrawler2 diretamente. Assim, você não precisa compilá-lo por conta própria; basta baixá-lo e executá-lo para coletar torrents e pesquisar torrents por palavra-chave. 
 
-Enjoy it!
+Apreciá-lo!
 
-## Usage
+## Uso
 
-* install Erlang R16B or newer
-* download mongodb and start mongodb first
+* instale o Erlang R16B ou mais recente
+* baixe o MongoDB e inicie o MongoDB primeiro.
 
         mongod --dbpath your-database-path --setParameter textSearchEnabled=true
 
-* start **crawler**, on Windows, just click `win_start_crawler.bat`
-* start **hash_reader**, on Windows, just click `win_start_hash.bat`
-* start **httpd**, on Windows, just click `win_start_http.bat`
-* wait several minutes and checkout `localhost:8000`
+* ara iniciar o **crawler** no Windows, basta clicar. `win_start_crawler.bat`
+* para iniciar o **hash_reader** no Windows, basta clicar. `win_start_hash.bat`
+* para iniciar o **httpd** no Windows, basta clicar. `win_start_http.bat`
+* aguarde alguns minutos e finalize a compra. `localhost:8000`
 
-You can also compile the source code and run it manually. The source code is in `src` branch of this repo.
+Você também pode compilar o código-fonte e executá-lo manualmente. O código-fonte está na branch `src` deste repositório..
 
-Also you can check more technique information at my blog site (Chinese) [codemacro.com](http://codemacro.com)
+Você também pode conferir mais informações técnicas no meu blog (em chinês). [codemacro.com](http://codemacro.com)
 
-## Source code
+## Código-fonte
 
-dhtcrawler is totally open source, and can be used for any purpose, but you should keep my name on, copyright by me please. You can checkout dhtcrawler2 source code in this git repo **src** branch.
+O dhtcrawler é totalmente de código aberto e pode ser utilizado para qualquer finalidade; no entanto, peço que mantenha meu nome e os direitos autorais associados a mim. Você pode conferir o código-fonte do dhtcrawler2 no repositório Git, na branch **src**.
 
-## Config
+## Configuração
 
-Most config value is in `priv/dhtcrawler.config`, when you first run dhtcrawler, this file will be generated automatically. And the other config values are passed by arguments to erlang functions. In most case you don't need to change these config values, except these network addresses.
+A maior parte das configurações encontra-se em `priv/dhtcrawler.config`; esse arquivo é gerado automaticamente na primeira execução do dhtcrawler. Os demais parâmetros de configuração são passados ​​como argumentos para funções do Erlang. Na maioria dos casos, não é necessário alterar essas configurações, exceto pelos endereços de rede.
 
-## Mongodb Replica set
+## Conjunto de réplicas do MongoDB
 
-It's not related to dhtcrawler, but only Mongodb, try figure it yourself.
+Não tem relação com o dhtcrawler, mas apenas com o MongoDB; tente descobrir por conta própria.
 
-## Another http front-end
+## Mais um front-end HTTP
 
-Yes of course you can write another http front-end UI based on the torrent database, if you're interested in it I can help you about the database format.
+Sim, claro, você pode criar outra interface HTTP baseada no banco de dados de torrents; se tiver interesse, posso ajudar com informações sobre o formato do banco de dados.
 
 ## Sphinx
 
-Yes, dhtcrawler2 supports **sphinx** search. There's a tool named `sphinx-builder` load torrents from database and create sphinx index. `crawler-http` can also search text by sphinx. 
+Sim, o dhtcrawler2 oferece suporte à busca via **Sphinx**. Existe uma ferramenta chamada `sphinx-builder` que carrega torrents do banco de dados e cria o índice do Sphinx. O `crawler-http` também pode realizar buscas de texto utilizando o Sphinx.. 
 
-dhtcrawler2 uses mongodb text search by default, to use sphinx, follow these steps below:
+O dhtcrawler2 utiliza a busca de texto do MongoDB por padrão; para usar o Sphinx, siga os passos abaixo:
 
-* Download sphinx, the version tested is a fork version named `coreseek` which supports Chinese characters. [coreseek4.1](http://www.coreseek.cn/news/14/52/)
-* unzip the binary archive and add `bin` directory to `PATH` environment variable, so that dhtcrawler can invoke `indexer` tool
-* config `etc/csft.conf` file
-    * add a delta index, i.e:
+* baixe o Sphinx; a versão testada é um *fork* chamado `coreseek`, que oferece suporte a caracteres chineses. [coreseek4.1](http://www.coreseek.cn/news/14/52/)
+* descompacte o arquivo binário e adicione o diretório `bin` à variável de ambiente `PATH`, para que o dhtcrawler possa invocar a ferramenta `indexer`.
+* arquivo de configuração `etc/csft.conf`
+    * adicione um índice delta, isto é:
         
             source delta:xml
             {
@@ -64,17 +64,17 @@ dhtcrawler2 uses mongodb text search by default, to use sphinx, follow these ste
                 path = g:/downloads/coreseek-4.1-win32/var/data/delta
             }
 
-    * change the other directories, better to use absolute path
-* run `win_init_sphinx_index.bat` to generate a default sphinx-builder config file, and terminate `win_init_sphinx_index.bat`
-* config `priv/sphinx_builder.config`, specify `main` and `delta` sphinx index source file name, `main` and `delta` index name and sphinx config file, these file names must match these configs you write in `etc/csft.conf`
-* run `win_init_sphinx_index.bat` again to initialize sphinx index file, terminate `win_init_sphinx_index.bat` and if it initializes sphinx index successfully, never run it again
-* run sphinx `searchd` server
-* run `win_start_sphinx_builder` to start sphinx-builder, it will read torrents from your torrent database and build the index into sphinx
-* change `priv/hash_reader.config` `search_method` to `sphinx`, so that `hash_reader` will not build mongodb text search index any more
-* change `priv/httpd.config` `search_method` to `sphinx`, so that `crawler-http` will search keyword by sphinx
+    * altere os outros diretórios; é melhor usar caminhos absolutos.
+* execute `win_init_sphinx_index.bat` para gerar um arquivo de configuração padrão do sphinx-builder e encerrar `win_init_sphinx_index.bat`
+* no arquivo de configuração `priv/sphinx_builder.config`, especifique os nomes dos arquivos de origem dos índices `main` e `delta` do Sphinx, os nomes dos índices `main` e `delta` e o arquivo de configuração do Sphinx; esses nomes de arquivo devem corresponder às configurações que você definir. `etc/csft.conf`
+* execute `win_init_sphinx_index.bat` novamente para inicializar o arquivo de índice do Sphinx, encerre o `win_init_sphinx_index.bat` e, se ele inicializar o índice com sucesso, nunca mais o execute.
+* execute o servidor `searchd` do Sphinx
+* execute `win_start_sphinx_builder` para iniciar o sphinx-builder; ele lerá os torrents do seu banco de dados de torrents e criará o índice no Sphinx.
+* altere o `search_method` em `priv/hash_reader.config` para `sphinx`, de modo que o `hash_reader` não construa mais o índice de busca de texto do MongoDB.
+* altere o `search_method` em `priv/httpd.config` para `sphinx`, de modo que o `crawler-http` realize a busca por palavras-chave utilizando o Sphinx.
 
-Lots of details! And you'd better to know sphinx well. 
+Muitos detalhes! E é bom você conhecer bem o Sphinx.
 
-## LICENSE
+## LICENÇA
 
-See LICENSE.txt
+Consulte o arquivo LICENSE.txt
