@@ -1,5 +1,5 @@
 {application, kdht, [
-  {description, "DHT library"},
+  {description, "Biblioteca DHT"},
   {vsn, git},
   {registered, []},
   {applications, [kernel, stdlib]},
