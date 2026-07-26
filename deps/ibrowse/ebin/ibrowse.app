@@ -1,5 +1,5 @@
 {application,ibrowse,
-             [{description,"Erlang HTTP client application"},
+             [{description,"Aplicativo cliente HTTP em Erlang"},
               {vsn,"4.0.1"},
               {registered,[ibrowse_sup,ibrowse]},
               {applications,[kernel,stdlib]},
