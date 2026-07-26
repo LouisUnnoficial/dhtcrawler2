@@ -1,5 +1,5 @@
 {application, bson,
- [{description, "BSON are JSON-like objects with a standard binary serialization. See bsonspec.org."},
+ [{description, "BSON são objetos semelhantes a JSON com uma serialização binária padrão. Veja em bsonspec.org."},
   {vsn, "0"},
   {modules, [bson, bson_binary, bson_tests]},
   {registered, []},
