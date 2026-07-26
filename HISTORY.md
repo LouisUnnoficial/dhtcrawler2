@@ -1,32 +1,32 @@
 ## 08.03.2013
 
-* sphinx searching is stable right now, you can config to use it
-* modify giza library, to support get sphinx search stats from response
-* add page navigation to http 
+* o Sphinx Search está estável no momento; você pode configurá-lo para uso.
+* modificar a biblioteca Giza para permitir a obtenção de estatísticas de busca do Sphinx a partir da resposta.
+* adicionar navegação de página ao http
 
 ## 07.30.2013
 
-* add sphinx (coreseek which based on sphinx) to help searhcing, in expirement stage
+* adicionar o Sphinx (Coreseek, baseado no Sphinx) para auxiliar na busca; em fase experimental.
 
 ## 07.21.2013
 
-* rewrite hash_reader, now it will keep a wait_download cache
-* change hash_writer(crawler) to insert unique hash
+* reescreva o hash_reader; agora ele manterá um cache wait_download.
+* alterar hash_writer(crawler) para inserir um hash único
 
 ## 07.19.2013
 
-* add simple json searhch api to http
+* adicionado uma API simples de busca JSON ao HTTP.
 
 ## 07.15.2013
 
-* crawler now will keep a hash cache, merge same hash in the cache, this makes hash_reader process less hashes
+* o crawler agora manterá um cache de hashes e mesclará hashes idênticos dentro dele; isso faz com que o hash_reader processe menos hashes.
 
 ## 07.08.2013
 
-* add torrent importer which can import local torrents into torrents database
+* adicionado um importador de torrents capaz de importar torrents locais para o banco de dados de torrents.
 
 ## 07.05.2013
 
-* add torrent downloader which will download torrents and store them in database or local file system
-* hash_reader now use local torrents first, if not it will download, and depends on the config it may save the file too
+* adicionado um baixador de torrents que baixe torrents e os armazene em um banco de dados ou no sistema de arquivos local.
+* o hash_reader agora prioriza o uso de torrents locais; caso contrário, ele fará o download e, dependendo da configuração, também poderá salvar o arquivo.
 
