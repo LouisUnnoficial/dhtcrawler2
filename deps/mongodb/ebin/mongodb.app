@@ -1,5 +1,5 @@
 {application,mongodb,
-             [{description,"Client interface to MongoDB, also known as the driver. See www.mongodb.org"},
+             [{description,"Interface de cliente para o MongoDB, também conhecida como driver. Veja em www.mongodb.org"},
               {vsn,"v0.3.1-96-g613f157"},
               {registered,[]},
               {applications,[kernel,stdlib,bson]},
